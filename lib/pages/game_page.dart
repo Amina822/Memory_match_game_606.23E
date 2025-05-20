@@ -9,7 +9,11 @@ class GamePage extends StatefulWidget {
   final int gridSize;
   final String difficulty;
 
-  const GamePage({super.key, required this.gridSize, required this.difficulty});
+  const GamePage({
+    super.key,
+    required this.gridSize,
+    required this.difficulty,
+  });
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -26,7 +30,16 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
+    _startNewGame();
+  }
+
+  void _startNewGame() {
+    _moves = 0;
+    _seconds = 0;
+    _firstCard = null;
+    _secondCard = null;
     _initializeGame();
+    _timer?.cancel();
     _startTimer();
   }
 
@@ -92,21 +105,15 @@ class _GamePageState extends State<GamePage> {
               moves: _moves,
               seconds: _seconds,
               onPlayAgain: () {
+                Navigator.of(context).pop(); // Close dialog
                 if (!mounted) return;
                 setState(() {
-                  _moves = 0;
-                  _seconds = 0;
-                  _firstCard = null;
-                  _secondCard = null;
-                  _initializeGame();
-                  _timer?.cancel();
-                  _startTimer();
+                  _startNewGame(); // Restart game without going to menu
                 });
-                Navigator.of(context).pop();
               },
               onExit: () {
                 if (!mounted) return;
-                Navigator.of(context).maybePop();
+                Navigator.of(context).maybePop(); // Return to menu
               },
             ),
           );
