@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/result_dialog.dart';
 
 class ResultDialog extends StatelessWidget {
   final int moves;
@@ -78,10 +77,7 @@ class ResultDialog extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      onPlayAgain?.call();
-                    },
+                    onPressed: onPlayAgain,
                   ),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.exit_to_app, color: Colors.white),
@@ -99,10 +95,7 @@ class ResultDialog extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      onExit?.call();
-                    },
+                    onPressed: onExit,
                   ),
                 ],
               ),
