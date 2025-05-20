@@ -105,16 +105,17 @@ class _GamePageState extends State<GamePage> {
               moves: _moves,
               seconds: _seconds,
               onPlayAgain: () {
-                Navigator.of(context).pop(); // Close dialog
+                Navigator.of(context).pop(); 
                 if (!mounted) return;
                 setState(() {
-                  _startNewGame(); // Restart game without going to menu
+                  _startNewGame();
                 });
               },
               onExit: () {
-                if (!mounted) return;
-                Navigator.of(context).maybePop(); // Return to menu
-              },
+     if (!mounted) return;
+      Navigator.of(context).pop(); 
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false); 
+   },
             ),
           );
         }
